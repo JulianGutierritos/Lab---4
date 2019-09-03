@@ -6,7 +6,10 @@ public class PowerBonusScore implements GameScore{
 	@param int correctCount, int incorrectCount
 	@throws claculateScoreException
 	*/
-	public int calculateScore(int correctCount, int incorrectCount){
+	public int calculateScore(int correctCount, int incorrectCount) throws ScoreException{
+		if ((correctCount < 0) || (incorrectCount < 0)){
+				throw new ScoreException(ScoreException.INTENTO_NEGATIVO);
+		}
 		int res = 0;
 		int correctas = 0;
 		if (correctCount > 0){

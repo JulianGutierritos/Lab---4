@@ -7,5 +7,5 @@ public interface GameScore{
 	@param int correctCount, int incorrectCount
 	@throws claculateScoreException
 	*/
-	public int calculateScore(int correctCount, int incorrectCount);	
+	public int calculateScore(int correctCount, int incorrectCount) throws ScoreException;	
 }

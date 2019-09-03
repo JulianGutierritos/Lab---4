@@ -57,6 +57,16 @@ public class GameScoreTest {
     }
 	
 	@Test
+    public void validateExceptionWithNegative1Incorrect() {
+        score = new OriginalScore();
+		try{
+			res = score.calculateScore(100, -1);
+		} catch(ScoreException e){
+			Assert.assertEquals(e.getMessage(), "El numero de intententos, ya sea correcto o incorrecto, debe ser mayor a 0.");
+		}
+    }
+	
+	@Test
     public void validateScore5With1IncorrectAnd1Correct() {
         score = new BonusScore();
 		res = score.calculateScore(1, 1);
