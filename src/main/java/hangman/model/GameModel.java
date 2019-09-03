@@ -24,6 +24,7 @@ public class GameModel {
     private LocalDateTime dateTime;
     private int gameScore;
     private int[] lettersUsed;
+	private GameScore scores;
     
     
     private HangmanDictionary dictionary;
@@ -37,12 +38,13 @@ public class GameModel {
     public GameModel(HangmanDictionary dictionary){
         //this.dictionary = new EnglishDictionaryDataSource();
         this.dictionary=dictionary;
+		scores = new OriginalScore();
         randomWord = selectRandomWord();
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
         gameScore = 100;
-        
+      
     }
     
     //method: reset
@@ -52,7 +54,9 @@ public class GameModel {
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        gameScore = 100;
+        try{
+		setGameScore();
+		}catch (ScoreException e){}
     }
 
     //setDateTime
@@ -74,10 +78,12 @@ public class GameModel {
         }
         if(positions.size() == 0){
             incorrectCount++;
-            gameScore -= 10;
         } else {
             correctCount += positions.size();
         }
+		try{
+		setGameScore();
+		}catch (ScoreException e){}
         return positions;
         
     }
@@ -129,8 +135,8 @@ public class GameModel {
 
     //method: setGameScore
     //purpose: set current game score
-    public void setGameScore(int gameScore) {
-        this.gameScore = gameScore;
+    public void setGameScore() throws ScoreException{
+		this.gameScore = scores.calculateScore(getCorrectCount(),getIncorrectCount());
     }
     
     //method: getWordLength
