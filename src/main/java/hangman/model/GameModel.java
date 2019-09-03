@@ -35,16 +35,15 @@ public class GameModel {
     
     
    
-    public GameModel(HangmanDictionary dictionary){
+    public GameModel(HangmanDictionary dictionary, GameScore scores){
         //this.dictionary = new EnglishDictionaryDataSource();
         this.dictionary=dictionary;
-		scores = new OriginalScore();
+		this.scores=scores;
         randomWord = selectRandomWord();
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
         gameScore = 100;
-      
     }
     
     //method: reset
